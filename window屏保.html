@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			overflow:hidden;
+		}
+		.cans{
+			background:#000;
+		}
+	</style>
+	<script>
+		
+		window.onload=function(){
+			var winW = document.documentElement.clientWidth;
+			var winH = document.documentElement.clientHeight;
+			// alert(winH);
+			var aPoint = [];
+			var oldPos=[];
+			var N = 5;
+			var oC = document.querySelector('.cans');
+			var gc = oC.getContext('2d');
+			var C = [255,255,255];
+			var len=10;
+
+			oC.width = winW;
+			oC.height = winH;
+			for(var i=0;i<N;i++){
+				aPoint[i]={
+					x:rnd(0,oC.width),
+					y:rnd(0,oC.height),
+					speedX:rnd(-10,10),
+					speedY:rnd(-10,10)
+				}
+			};
+			setInterval(function(){
+				C = [rnd(0,256),rnd(0,256),rnd(0,256)];
+			},1000);
+			//让点运动起来
+			setInterval(function(){
+				gc.clearRect(0,0,winW,winH)
+				for(var i=0;i<N;i++){
+					aPoint[i].x+=aPoint[i].speedX;
+					aPoint[i].y+=aPoint[i].speedY;
+					if(aPoint[i].x>=winW){
+						aPoint[i].x=winW;
+						aPoint[i].speedX*=-1;
+					}
+					if(aPoint[i].x<0){
+						aPoint[i].x=0;
+						aPoint[i].speedX*=-1;
+					}
+					if(aPoint[i].y>=winH){
+						aPoint[i].y=winH;
+						aPoint[i].speedY*=-1;
+					}
+					if(aPoint[i].y<0){
+						aPoint[i].y=0;
+						aPoint[i].speedY*=-1;
+					}
+					gc.fillRect(aPoint[i].x,aPoint[i].y,1,1)
+				}		
+				
+				//描点
+				// opacity = 1- 
+				gc.beginPath();
+				// gc.strokeStyle = '#fff';
+				gc.moveTo(aPoint[0].x,aPoint[0].y);
+				// alert(aPoint.length)
+				for(var i=0;i<N;i++){
+					gc.lineTo(aPoint[i].x,aPoint[i].y)
+				};
+				gc.closePath();
+				gc.stroke();
+				//保存老的位置
+				gc.strokeStyle='rgb('+C[0]+','+C[1]+','+C[2]+')';
+				var arr = [];
+				for(var i=0;i<N;i++){
+					arr[i]={
+						x:aPoint[i].x,
+						y:aPoint[i].y
+					}
+				}
+				oldPos.push(arr);
+				while(oldPos.length>len){
+					oldPos.shift();
+				}
+				for(var i=0;i<oldPos.length;i++){
+					gc.beginPath();
+					var opacity = 1- i/oldPos.length;
+					gc.strokeStyle = 'rgba('+C[0]+','+C[1]+','+C[2]+','+opacity+')';
+					gc.moveTo(oldPos[i][0].x,oldPos[i][0].y)
+					for(var j=0;j<oldPos[i].length;j++){
+						gc.lineTo(oldPos[i][j].x,oldPos[i][j].y);
+					}
+					gc.closePath();
+					gc.stroke();
+				}
+
+			},16)
+			// function drawPoint(point){
+			// 	gc.fillStyle = '#fff';
+			// 	gc.fillRect (point.x,point.y,1,1)
+			// }
+			function rnd(n,m){
+				return parseInt(n+Math.random()*(m-n))
+			} 
+		};
+	</script>
+</head>
+<body>
+	<canvas class="cans" ></canvas>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			text-align:center;
+			background:#000;
+		}
+		.cas{
+			/*width:600px;
+			height:600px;*/
+			background:#fff;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oCans = document.querySelector('.cas');
+			// alert(oCans);
+			var gc = oCans.getContext('2d');
+			// gc.lineWidth = '10';
+			gc.fillStyle='rgba(123,333,233,123)';
+			gc.moveTo(206,40);
+			gc.lineTo(340,172);
+			gc.lineTo(206,306);
+			gc.closePath();
+			// 填充
+			gc.fill();
+			// 描边
+			// gc.stroke();
+		};
+	</script>
+</head>
+<body>
+	<canvas class="cas" width="800" height="800">
+		<span>您的浏览器不支持canvas</span>
+	</canvas>
+</body>
+</html>

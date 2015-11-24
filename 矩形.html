@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background:#000;
+		}
+		.cans{
+			background:#fff;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oCans = document.querySelector('.cans');
+			var gc = oCans.getContext('2d');
+			gc.beginPath();
+			// gc.strokeRect(100,100,300,300);
+			gc.fillRect(100,100,300,200);
+			gc.closePath();  
+		};
+	</script>
+</head>
+<body>
+	<canvas class="cans" width="800" height="700">
+		
+	</canvas>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{
+			background:#-1;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oC = document.querySelector('.cans');
+			var gc = oC.getContext('2d');
+			gc.lineWidth='10';
+			gc.beginPath();
+			gc.strokeStyle='red';
+			gc.moveTo(200,200);
+			gc.lineTo(200,400);
+			gc.stroke();
+			gc.closePath();
+			gc.beginPath();
+			gc.strokeStyle = 'yellow'
+			gc.moveTo(100,100);
+			gc.lineTo(100,200);
+			gc.stroke();
+			gc.closePath();
+		};
+	</script>
+</head>
+<body>
+	<canvas width="800" height="600" class="cans"></canvas>
+</body>
+</html>

@@ -1,0 +1,55 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>Document</title>
+ 	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			background:#000;
+			text-align:center;
+		}
+		.cans{
+			background:#fff;
+			text-align:center;
+			padding-top:50px;
+			padding-left:50px;
+			padding-right:50px;
+		}
+ 	</style>
+ 	<script>
+ 		function rnd(n,m){
+ 			return parseInt(n+Math.random()*(m-n))
+ 		}
+ 		window.onload=function(){
+ 			var oC = document.querySelector('.cans');
+ 			var arr = [100,200,135,190,400,500,299]
+ 			var iMax = Math.max.apply(null,arr);
+ 			// alert(arrmax)
+ 			document.title = Math.max.apply(null,arr);
+ 			var aHeight = [];
+ 			for(var i=0;i<arr.length;i++){
+ 				aHeight.push(arr[i]/iMax*oC.height);
+ 			}
+ 			// console.log(aHeight[2])
+ 			var gc = oC.getContext('2d');
+ 			// var w = 50;
+ 			// var ispeed = 15;
+ 			var sca = oC.width/(arr.length*4-1);
+ 			var w  = 3*sca;
+ 			var ispeed = sca; 
+ 			for(var i=0;i<aHeight.length;i++){
+ 				gc.fillStyle = 'rgba('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')'
+ 				gc.fillRect(i*(w+ispeed),oC.height-aHeight[i],w,aHeight[i])
+ 			}
+ 		};
+ 	</script>
+ </head>
+ <body>
+ 	<!-- <div></div> -->
+ 	<canvas class="cans" width="700" height="550" padding-top="20"></canvas>
+ </body>
+ </html>
