@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background:#000;
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+		canvas{
+			background:#fff;
+		}
+	</style>
+	<script>
+		function d2r(d){
+			return d*Math.PI/180
+		}
+		window.onload=function(){
+			var oC =  document.querySelector('canvas');
+			var gc = oC.getContext('2d');
+			var timer = null;
+			var i = 0;
+			var bOk =false;
+			gc.lineWidth="20"
+			gc.strokeStyle="#000"
+			timer = setInterval(function(){
+				i++;
+				gc.beginPath();
+				gc.arc(300,300,100,d2r(0),d2r(i+1),bOk);
+				gc.clearRect(0,0,oC.width,oC.height);
+				gc.strokeStyle = "rgb("+255*i/360+",0,0)";
+				gc.stroke();
+				console.log(i)
+				gc.closePath();
+
+				if(i==360){
+					// gc.strokeStyle = "rgba(0,"+255*i/360+",0,)"	
+					i*=-1;
+					bOk=!bOk;
+					// alert(1)
+				}
+				if(i==-1){
+					i*=-1;
+					bOk=!bOk;
+				}
+				gc.beginPath();
+				gc.arr(400,200,100,d2r(0),d2r(i+1),bOk);
+				gc.clearRect(0,0,oC.width,oC.height);
+				gc.strokeStyle = 'rgb('+255*1/360+',0,0)';
+				gc.stroke();
+				gc.closePath();
+			},16) 
+		}
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700"></canvas>
+</body>
+</html>

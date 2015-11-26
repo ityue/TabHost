@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{
+			background:#000;
+			text-align:center; 
+		}
+		canvas{background:#fff;}
+	</style>
+	<script>
+		window.onload=function(){
+			var oC=document.querySelector('canvas');
+			var gd=oC.getContext('2d');
+			var l=100,t=200,w=300,h=200;
+			gd.strokeRect(l,t,w,h);
+			var r = l+w;  
+			var b = t+h;
+			oC.onmousedown=function(ev){
+				var x = ev.pageX-oC.offsetLeft;
+				var y = ev.pageY-oC.offsetTop;
+				gd.clearRect(0,0,oC.offsetWidth,oC.offsetHeight);
+				if(x>l&&x<r&&y>t&&y<b){
+					var disX = x-l;
+					var disY = y-t;
+					document.onmousemove=function(ev){
+						var x = ev.pageX-oC.offsetLeft,y = ev.pageY-oC.offsetTop;
+						var l = x-disX;
+						var t = y-disY;
+						gd.strokeRect(l,t,w,h)  
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					};
+				}
+				return false	
+			};
+		};
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700"></canvas>
+</body>
+</html>

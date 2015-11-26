@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			background:#000;
+		}
+		canvas{
+			background:#fff;
+		}
+
+	</style>
+	<script>
+		function d2a(d){
+			return d*Math.PI/180
+		}
+		window.onload=function(){
+			var oC = document.querySelector('canvas');
+			var gc = oC.getContext('2d');
+			var linear = gc.createLinearGradient(300,200,355,375);
+			linear.addColorStop(0,'red');
+			linear.addColorStop(1,'blue');
+			gc.lineWidth="20"
+			var i = 0;
+			setInterval(function(){
+				gc.beginPath();
+				gc.arc(300,300,100,0,d2a(i+1),false);
+				gc.strokeStyle=linear;
+				gc.stroke();
+				i++;
+			},16)
+		};
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700"></canvas>
+</body>
+</html>

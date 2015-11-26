@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{background:#000;}
+		canvas{background:#fff;}
+	</style>
+	<script>
+		function d2r(n){
+			return n*Math.PI/180
+		}
+		function rotate(gd,x,y,w,h,r,color){
+			gd.save();
+			gd.beginPath();
+			gd.translate(x+w/2,y+h/2);
+			gd.rotate(d2r(r))
+			gd.fillStyle = color;
+			gd.strokeRect(-w/2,-h/2,w,h);
+			gd.restore();
+		}
+		window.onload=function(){
+			var oC = document.querySelector('canvas');
+			// alert(oC)
+			var gd = oC.getContext('2d');
+			// alert(gd)
+			var timer = null;
+			var r1 = 0,r2=0;
+			timer = setInterval(function(){
+				gd.clearRect(0,0,oC.width,oC.height);
+				r1+=2;
+				r2-=2;
+				rotate(gd,200,200,300,300,r1,'red');
+				rotate(gd,300,300,200,200,r2,'green')
+			},16)
+			
+			
+		
+		}
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700" ></canvas>
+</body>
+</html>

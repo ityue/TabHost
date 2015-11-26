@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0; padding:0;}
+		body{
+			background:#000;
+			/*text-align:center;*/
+		}
+		.canvas{
+			background:#fff;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oC = document.querySelector('canvas');
+			var gc = oC.getContext('2d');
+			document.onmousedown=function(ev){
+				gc.moveTo(ev.clientX,ev.clientY);
+				document.onmousemove=function(ev){
+					gc.clearRect(0,0,oC.width,oC.height);
+					gc.lineWidth = "10";
+					gc.strokeStyle = "red"
+					gc.lineTo(ev.clientX,ev.clientY);
+					gc.stroke();
+				};
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				};
+				return false;
+			};
+		};
+	</script>
+</head>
+<body>
+	<canvas class="canvas" width="800" height="700">
+		<!-- <input type="text" value="" > -->
+		
+	</canvas>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background:#000;
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+		canvas{
+			background:#fff;
+		}
+	</style>
+	<script>
+		function d2r(d){
+			return d*Math.PI/180
+		}
+		window.onload=function(){
+			var oC = document.querySelector('canvas');
+			var gc = oC.getContext('2d');
+			gc.strokeStyle="#000";
+			gc.arc(300,300,100,d2r(0),d2r(360),false)
+			gc.stroke();
+		};
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700"></canvas>
+</body>
+</html>

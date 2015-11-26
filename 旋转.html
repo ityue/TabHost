@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{background:#000;}
+		canvas{background:#fff;}
+	</style>
+	<script>
+		function d2r(r){
+			return r*Math.PI/180
+		}
+		function rotate(x,y,w,h,r){
+			var oC = document.querySelector('canvas');
+			var gd = oC.getContext('2d');
+			gd.save();
+			gd.beginPath();
+			gd.translate(x+w/2,y+h/2);
+			gd.rotate(r);
+			gd.strokeRect(-w/2,-h/2,w,h);
+			gd.restore();
+		}
+		window.onload=function(){
+			
+			var timer = null;
+			var r = 0;
+			timer = setInterval(function(){
+				r++;
+				rotate(200,200,300,300,r)
+			},16)
+			
+			
+		
+		}
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700" ></canvas>
+</body>
+</html>

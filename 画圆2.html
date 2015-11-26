@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background:#000;
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+		canvas{
+			background:#fff;
+		}
+	</style>
+	<script>
+		function d2a(d){
+			return d*Math.PI/180
+		}
+		window.onload=function(){
+			var oC =  document.querySelector('canvas');
+			var gc = oC.getContext('2d');
+			var timer = null;
+			var i = 0;
+			gc.lineWidth="20"
+			gc.strokeStyle="#000"
+			timer = setInterval(function(){
+				i++;
+				// gc.beginPath();
+				gc.arc(300,300,100,d2a(i),d2a(i+1),false);
+				gc.clearRect(0,0,oC.width,oC.height);
+				gc.strokeStyle = "rgb(0,"+255*i/360+",0)"
+				gc.stroke();
+				if(i>360){
+					clearInterval(timer)
+				}
+			},16) 
+		}
+	</script>
+</head>
+<body>
+	<canvas width="800" height="700"></canvas>
+</body>
+</html>
