@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<style>
+body {background:black; text-align:center;}
+#c1 {background:white;}
+</style>
+<script>
+	function r2d(n){
+		return n*Math.PI/180;
+	}
+	window.onload=function(){
+		var oC = document.getElementById('c1');
+		var gd = oC.getContext('2d');
+		var cx=200,cy=200,r=100;
+		gd.beginPath();
+		
+		gd.arc(cx,cy,r,0,Math.PI*2,false);
+		gd.stroke();
+		oC.onmousedown=function(ev){
+			var x = ev.clientX-oC.offsetLeft,y = ev.clientY-oC.offsetTop;
+			var a = x-cx,b=y-cy;
+			var dis = Math.sqrt(a*a+b*b);
+			if(dis<r){
+				disX = x-cx;
+				disY = y-cy;
+				document.onmousemove=function(ev){
+					gd.clearRect(0,0,oC.width,oC.height)
+					var x = ev.clientX-oC.offsetLeft,y = ev.clientY-oC.offsetTop;
+					cx = x-disX;
+					cy = y- disY;
+					gd.beginPath();
+					document.title=cx+','+cy;
+					gd.arc(cx,cy,r,0,Math.PI*2,false);
+					gd.stroke();  
+				};
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				};
+				return false;
+			}
+		};
+	};
+</script>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<canvas width="800" height="600" id="c1"></canvas>
+</body>
+</html>
