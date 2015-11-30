@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="raphael.js"></script>
+	<script>
+		window.onload=function(){
+			var oPage = Raphael(0,0,800,600);
+			var oPath = oPage.path();
+			oPath.attr('path',['M',200,200,'L',300,100,350,200,450,200,500,100,600,200,500,300,600,400,500,500,450,400,350,400,300,500,200,400,300,300,'Z'].join( ' ' ));
+		};
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
