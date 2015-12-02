@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalabel=no"/>
+	<style>
+		.box{
+			width:100px;
+			height:100px;
+			background:red;
+			position:absolute;
+			top:0;
+			left:0; 
+		}
+		.box2{
+			width:150px;
+			height:200px;
+			background:yellow;
+			position:absolute;
+			top:100px;
+			left:10px;
+		}
+		.box3{
+			width:200px;
+			height:200px;
+			position:absolute;
+			top:20px;
+			left:20px;
+			background:blue;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			// var oBox = document.getElementById('box');
+			// var oBox2 = document.getElementById('box2');
+			// var oBox3 = document.getElementById('box2');
+
+			function drag(obj){
+
+				obj.addEventListener('touchstart',function(ev){
+					var target = ev.targetTouches[ev.targetTouches.length-1];
+					// alert(ev.targetTouches.length)
+					var disX = target.pageX-obj.offsetLeft;
+					var disY = target.pageY-obj.offsetTop;
+					var id = target.identifier;
+					function tomove(ev){
+						for(var i=0;i<ev.targetTouches.length;i++){
+							if(ev.targetTouches[i].identifier==id){
+								var l = ev.targetTouches[i].pageX-disX;
+								var t = ev.targetTouches[i].pageY-disY;
+								obj.style.left = l+'px';
+								obj.style.top = t+'px';
+								console.log(id)
+							}
+						}
+						
+					}
+					function toup(ev){
+						for(var i=0;i<ev.targetTouches.length;i++){
+							if(ev.targetTouches[i].identifier==id){
+							obj.removeEventListener('touchmove',tomove,false);
+							obj.removeEventListener('touchup',toup,false);								
+							}
+						}
+						
+					}
+					obj.addEventListener('touchmove',tomove,false);
+					obj.addEventListener('touchup',toup,false);
+				},false)
+			}
+			// drag(oBox);	
+			// drag(oBox2);				
+			// drag(oBox3);
+			var oBox = document.getElementsByTagName('div');
+			for(var i=0;i<oBox.length;i++){
+				drag(oBox[i]);
+			}				
+
+			// oBox.addEventListener('touchstart',function(ev){
+			// 	function tomove(ev){
+			// 		var l = ev.targetTouches[0].pageX-disX;
+			// 		var t = ev.targetTouches[0].pageY-disY;
+			// 		if(l>document.documentElement.clientWidth-oBox.offsetWidth){
+			// 			l=document.documentElement.clientWidth-oBox.offsetWidth;
+			// 		}
+			// 		if(l<0){
+			// 			l=0;
+			// 		}
+			// 		if(t>document.documentElement.clientHeight-oBox.offsetHeight){
+			// 			t=document.documentElement .clientHeight-oBox.offsetHeight;
+			// 		}
+			// 		if(t<0){
+			// 			t=0;
+			// 		}
+			// 		oBox.style.left = l+'px';
+			// 		oBox.style.top = t+'px';
+			// 	}
+			// 	function toup(){
+			// 		oBox.removeEventListener('touchmove',tomve,false);
+			// 		oBox.removeEventListener('touchup',tomove,false);
+			// 	}
+			// 	var taget = ev.targetTouches.length-1;
+			// 	var disX = taget.targetTouches[0].pageX-oBox.offsetLeft;
+			// 	var disY = taget.targetTouches[0].pageY-oBox.offsetTop;
+			// 	oBox.addEventListener('touchmove',tomove,false)
+			// 	oBox.addEventListener('touchup',toup,false)
+			// 	ev.preventDefault();
+			// },false)	
+		}
+	</script>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box2"></div>
+	<div class="box3"></div>
+
+</body>
+</html>
